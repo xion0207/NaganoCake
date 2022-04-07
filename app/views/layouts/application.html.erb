@@ -11,6 +11,18 @@
   </head>
 
   <body>
+    <header>
+
+
+           <li>
+            <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link text-light" do %>
+            <i  class="fas fa-sign-out-alt"></i> ログアウト
+           </li>
+           <% end %>
+
+    </header>
+    <main>
     <%= yield %>
+    </main>
   </body>
 </html>
