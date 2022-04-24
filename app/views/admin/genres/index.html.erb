@@ -1,0 +1,19 @@
+<h1>ジャンル一覧・追加</h1>
+  <% if @genre.errors.any? %>
+    <h3><%= @genre.errors.count %>errors prohibited this obj from being saved:</h3>
+    <ul>
+     <% @genre.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+     <% end %>
+    </ul>
+  <% end %>
+<h2>ジャンル名</h2>
+<%= form_with model: @genre, url: "genres" do |f| %>
+  <%= f.text_field :name, placeholder: "ジャンル名" %>
+  <%= f.submit '新規登録' %>
+<% end %>
+<h2>ジャンル</h2>
+<% @genres.each do |genre| %>
+ <%= genre.name %>
+ <%= link_to "編集する", edit_admin_genre_path(genre.id) %>
+<% end %>

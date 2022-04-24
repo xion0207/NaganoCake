@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <table class="table table-borderless">
+        <tbody class="border border-dark">
+            <tr class="border-bottom border-dark"><td>ジャンル検索</td></tr>
+            <% @genres.each do |genre| %>
+            <tr><td><%= genre.name %></td></tr>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <table class="table table-borderless">
+        <h3>商品一覧（前<%= Item.last.id %>件）</h3>
+        <tbody class="text-break">
+			    <tr><% @items.each do |item| %>
+			      <td><%= image_tag item.image, size: '165x105', class:"attachment item image fallback" %></td><% end %>
+			    </tr>
+			    <tr>
+			      <% @items.each do |item| %><td><%= item.name %></td><% end %>
+			    </tr>
+			    <tr>
+			      <% @items.each do |item| %><td><%= item.price %></td><% end %>
+			    </tr>
+			  </tbody>
+      </table>
+    </div>
+  </div>
+</div>

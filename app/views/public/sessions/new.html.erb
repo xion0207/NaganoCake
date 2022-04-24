@@ -1,26 +1,45 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto d-block">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th><h4 class="font-weight-bold bg-light">ログイン</h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="font-weight-bold bg-light">会員の方はこちらからログイン</th>
+          </tr>
+          <%= form_with model: @customer, url: session_path(resource_name) do |f| %>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %></td>
+          </tr>
+          <tr>
+            <th>パスワード</th>
+            <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+              <div class="actions">
+             <%= f.submit "ログイン", class: "btn btn-primary" %>
+             </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th class="font-weight-bold bg-light">会員登録がお済みでない方</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td><%= render "public/shared/links" %>から新規登録を行なってください。</td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
