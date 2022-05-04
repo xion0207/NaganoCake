@@ -2,7 +2,7 @@ class Public::AddressesController < ApplicationController
   before_action :authenticate_customer!
   def index
     @address = Address.new
-    @addresses = Address.page(params[:page])
+    @addresses = Address.where(customer_id: current_customer.id ).page(params[:page])
   end
 
   def create
@@ -24,6 +24,9 @@ class Public::AddressesController < ApplicationController
   end
 
   def destroy
+    address = Address.find(params[:id])
+    address.destroy
+    redirect_to addresses_path
   end
 
   def address_params

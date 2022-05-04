@@ -12,30 +12,74 @@
      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
      <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+
   </head>
 
   <body>
     <header>
+      <nav class="navbar navbar-expand-lg navbar-dark border-bottom border-dark">
+
+          <h3 class="navbar"><%= link_to image_tag('logo.png', size: '250x65'), '/' %></h3>
+          <% if customer_signed_in? %>
+          <p>ようこそ、<%= current_customer.last_name %>さん！</p>
+          <% end %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+         <ul class="navbar-nav ml-auto">
 
            <% if customer_signed_in? %>
-            <li>
-            <%= link_to destroy_customer_session_path, method: :delete do %>
-             publicログアウト
-             <% end %>
-            </li>
+           <li>
+            <%= link_to  customers_my_page_path, class:"nav-link text-dark" do %>
+            <i class="border p-2 rounded">マイページ</i>
+            <% end %>
+           </li>
+           <li>
+            <%= link_to items_path, class:"nav-link text-dark" do %>
+            <i class="border p-2 rounded">商品一覧</i>
+            <% end %>
+           </li>
+           <li>
+            <%= link_to cart_items_path, class:"nav-link text-dark" do %>
+            <i class="border p-2 rounded">カート</i>
+            <% end %>
+           </li>
+           <li>
+            <%= link_to destroy_customer_session_path, method: :delete, class:"nav-link text-dark" do %>
+            <i  class="border p-2 rounded">ログアウト</i>
+            <% end %>
+           </li>
+
            <% else %>
-           <p>ログイン「</p>
+           <li>
+            <%= link_to customer_session_path, class:"nav-link text-dark" do %>
+            <i  class="border p-2 rounded">ログイン</i>
+            <% end %>
+           </li>
            <% end %>
+
            <% if admin_signed_in? %>
            アドミン
            <%= link_to destroy_admin_session_path, method: :delete do %>
              adminログアウト
             <% end %>
            <% end %>
+           </ul>
+          </div>
 
+      </nav>
     </header>
     <main>
+      <p id="notice"></p><br>
     <%= yield %>
     </main>
+    <br><br><br><br><br>
+    <footer class="fixed-bottom border-top border-dark bg-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

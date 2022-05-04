@@ -5,7 +5,7 @@
         <tbody class="border border-dark">
             <tr class="border-bottom border-dark"><td>ジャンル検索</td></tr>
             <% @genres.each do |genre| %>
-            <tr><td><%= genre.name %></td></tr>
+            <tr><td><%= link_to items_path(genre_id: genre.id) do %><%= genre.name %><% end %></td></tr>
             <% end %>
           </tr>
         </tbody>
@@ -13,22 +13,30 @@
     </div>
     <div class="col-md-7 offset-md-1">
 
-      <div class="card bg-dark text-dark">
+      <div class="card text-dark">
 				<%= image_tag"AAC_1323.jpg", class:'img-fluid' %>
 				<div class="card-img-overlay">
-          <p class="card-text">ようこそながのCAKEへ！<p>
-          <p class="card-text">このサイトは、ケーキ販売のECサイトになります。</p>
-          <p class="card-text">会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
+          <p class="card-text offset-md-3 mt-5">ようこそながのCAKEへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
         </div>
 			</div>
 		</div>
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
+			<br>
 		  <h2>新着商品</h2><br>
 			<table class="table table-borderless">
 			  <tbody>
-			    <tr><% @items.each do |item| %>
-			      <td><%= image_tag item.image, size: '165x105', class:"attachment item image fallback" %></td><% end %>
+			    <tr>
+			    	<% @items.each do |item| %>
+			      <td><% if item.image.attached? %>
+			            <%= image_tag item.image, size: '165x105', class:"attachment item image fallback" %>
+			          <% else %>
+			            <%= image_tag 'no_image', size: '165x105', class:"attachment item image fallback" %>
+			          <% end %>
+			      </td>
+			      <% end %>
 			    </tr>
 			    <tr>
 			      <% @items.each do |item| %><td><%= item.name %></td><% end %>

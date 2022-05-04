@@ -8,10 +8,17 @@ Rails.application.routes.draw do
     patch '/customers' => 'customers#update'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw'
-    resources :cart_items, only: [:index, :update, :destroy, :create]
+    resources :cart_items, only: [:index, :update, :destroy, :create,] do
+      collection do
+        delete 'destroy_all'
+      end
+    end
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :items, only: [:index, :show]
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/complete' => 'orders#complete'
+    resources :orders, only: [:new, :create, :index, :show]
   end
 
   namespace :admin do
