@@ -1,2 +1,29 @@
-<h1>Public::Orders#index</h1>
-<p>Find me in app/views/public/orders/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ml-5"><br><h4 class="bg-light text-center offset-md-2" style="width: 10rem;">注文履歴一覧</h4><br></div>
+      <table class="table table-bordered">
+        <tbody>
+          <tr class="bg-right">
+            <th>注文日</th>
+            <th>配送先</th>
+            <th>注文商品</th>
+            <th>支払金額</th>
+            <th>ステータス</th>
+            <th>注文詳細</th>
+          </tr>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
+            <td><% (OrderDetail.where(order_id: order.id )).each do |order_detail| %><%= order_detail.item.name %><br><% end %></td>
+            <td><%= order.subtotal.to_s(:delimited) %>円</td>
+            <td></td>
+            <td><%= link_to order_path(order.id), class:"btn btn-primary" do %>表示する<% end %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
