@@ -42,7 +42,9 @@
     </div>
     <br>
     <div class="text-center">
+      <% if @cart_items.exists? %>
     <%= link_to new_order_path, class:"btn btn-success" do %>情報入力に進む<% end %>
+    <% end %>
     </div>
     <br>
     </div>

@@ -20,5 +20,6 @@ class Customer < ApplicationRecord
   validates :first_name_kana, presence: true, format: { with: KANA }, length: { maximum: 20 }
   validates :postal_code, numericality: {only_integer: true}, length: { is: 7 }
   validates :address, presence: true
-  validates :telephone_number, numericality: {only_integer: true}, length: { in: 10..11 }
+  validates :telephone_number, numericality: {only_integer: true}, length: { in: 9..11 }
+  validates :postal_code, numericality: {only_integer: true}
 end
