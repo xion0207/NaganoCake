@@ -1,23 +1,57 @@
-<h1>商品編集</h1>
-<%= form_with model: @item, url: admin_item_path do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <% if @item.errors.any? %>
+        <h3><%= @item.errors.count %>件のerrorが発生しました</h3>
+        <ul>
+          <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <h4 class="bg-light text-center offset-md-1" style="width: 10rem;">商品新規登録</h4>
+      <br>
+      <%= form_with model: @item, url: admin_item_path do |f| %>
+      <table class="table table-borderless offset-md-2">
+        <tr>
+          <th>商品画像</th>
+          <td><%= f.file_field :image, placeholder: "Image", accept: "image/*", class:"form-control-file item_image" %></td>
+        </tr>
+        <tr>
+          <th>商品名</th>
+          <td><%= f.text_field :name, placeholder: "商品名", :size=>"40" %></td>
+        </tr>
+        <tr>
+         　<th>商品説明</th>
+         　<td><%= f.text_area :introduction, placeholder: "ここに説明文を記載します", :size=>"40x10" %></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= f.collection_select :genre_id, Genre.all, :id, :name, {prompt: 'ジャンルを選択してください'}, class: 'mclist__select' %></td>
+        </tr>
+        <tr>
+          <th>税抜価格</th>
+          <td><%= f.text_field :price, placeholder: "1000" %>円</td>
+        </tr>
+        <tr>
+          <th>販売ステータス</th>
+          <td>
+            <%= f.label :is_active, '販売中', value: true %>
+            <%= f.radio_button :is_active, true %>
+            <%= f.label :is_active, '販売停止中', value: false %>
+            <%= f.radio_button :is_active, false %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit '変更を保存', class:"btn btn-success" %></td>
+        </tr>
+      </table>
+        <% end %>
+    </div>
+  </div>
+</div>
 
-  <h4>ジャンル名</h4>
-  <h4>商品画像</h4>
- <%= f.file_field :image, accept: "image/*" %>
- <h4>商品名</h4>
- <%= f.text_field :name %>
- <h4>商品説明</h4>
- <%= f.text_field :introduction %>
- <h4>ジャンル</h4>
- <%= f.collection_select :genre_id, Genre.all, :id, :name, class: 'mclist__select' %>
- <h4>税抜価格</h4>
- <%= f.text_field :price %>円
- <h4>販売ステータス</h4>
- <%= f.label :is_active, '販売中', value: 1 %>
- <%= f.radio_button :is_active, '1' %>
- <%= f.label :is_active, '販売停止中', value: 0 %>
- <%= f.radio_button :is_active, '0' %>
 
-  <%= f.submit '変更を保存' %>
 
-<% end %>

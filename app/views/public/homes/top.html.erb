@@ -16,7 +16,7 @@
       <div class="card text-dark">
 				<%= image_tag"AAC_1323.jpg", class:'img-fluid' %>
 				<div class="card-img-overlay">
-          <p class="card-text offset-md-3 mt-5">ようこそながのCAKEへ！<br>
+          <p class="card-text offset-md-3 mt-5 bg-white">ようこそながのCAKEへ！<br>
           このサイトは、ケーキ販売のECサイトになります。<br>
           会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
         </div>
@@ -30,23 +30,20 @@
 			  <tbody>
 			    <tr>
 			    	<% @items.each do |item| %>
-			      <td><% if item.image.attached? %>
+			      <td>
+			      	<%= link_to item_path(item.id) do %>
+			      	<% if item.image.attached? %>
 			            <%= image_tag item.image, size: '165x105', class:"attachment item image fallback" %>
 			          <% else %>
 			            <%= image_tag 'no_image', size: '165x105', class:"attachment item image fallback" %>
 			          <% end %>
+			      <%= item.name %><% end %><br>¥<%= item.price.to_s(:delimited) %>
 			      </td>
 			      <% end %>
 			    </tr>
-			    <tr>
-			      <% @items.each do |item| %><td><%= item.name %></td><% end %>
-			    </tr>
-			    <tr>
-			      <% @items.each do |item| %><td><%= item.price %></td><% end %>
-			    </tr>
 			  </tbody>
 			</table>
-			<p class="text-right">全ての商品を見る></p>
+			<p class="text-right"><%= link_to items_path do %>全ての商品を見る><% end %></p>
 		</div>
 
 

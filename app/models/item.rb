@@ -10,5 +10,4 @@ class Item < ApplicationRecord
   validates :name, presence: true, length: { maximum: 99 }
   validates :introduction, presence: true, length: { maximum: 999 }
   validates :genre_id, presence: true
-  validates :is_active, presence: true or false
 end

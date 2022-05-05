@@ -1,17 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 mx-auto d-block">
+      <%= form_with model: @customer, url: session_path(resource_name) do |f| %>
       <table class="table table-borderless">
         <thead>
           <tr>
             <th><h4 class="font-weight-bold bg-light">ログイン</h4></th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
             <th class="font-weight-bold bg-light">会員の方はこちらからログイン</th>
           </tr>
-          <%= form_with model: @customer, url: session_path(resource_name) do |f| %>
+
           <tr>
             <th>メールアドレス</th>
             <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %></td>
@@ -23,13 +25,14 @@
           <tr>
             <th></th>
             <td>
-              <div class="actions">
+
              <%= f.submit "ログイン", class: "btn btn-primary" %>
-             </div>
+
             </td>
           </tr>
-          <% end %>
+
         </tbody>
+
         <tfoot>
           <tr>
             <th class="font-weight-bold bg-light">会員登録がお済みでない方</th>
@@ -40,6 +43,7 @@
           </tr>
         </tfoot>
       </table>
+      <% end %>
     </div>
   </div>
 </div>

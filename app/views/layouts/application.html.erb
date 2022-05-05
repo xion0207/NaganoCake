@@ -24,50 +24,88 @@
           <p>ようこそ、<%= current_customer.last_name %>さん！</p>
           <% end %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-         <ul class="navbar-nav ml-auto">
+           <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
 
-           <% if customer_signed_in? %>
-           <li>
-            <%= link_to  customers_my_page_path, class:"nav-link text-dark" do %>
-            <i class="border p-2 rounded">マイページ</i>
-            <% end %>
-           </li>
-           <li>
-            <%= link_to items_path, class:"nav-link text-dark" do %>
-            <i class="border p-2 rounded">商品一覧</i>
-            <% end %>
-           </li>
-           <li>
-            <%= link_to cart_items_path, class:"nav-link text-dark" do %>
-            <i class="border p-2 rounded">カート</i>
-            <% end %>
-           </li>
-           <li>
-            <%= link_to destroy_customer_session_path, method: :delete, class:"nav-link text-dark" do %>
-            <i  class="border p-2 rounded">ログアウト</i>
-            <% end %>
-           </li>
+              <% if customer_signed_in? %>
+                <li>
+                  <%= link_to  customers_my_page_path, class:"nav-link text-dark" do %>
+                    <i class="border p-2 rounded">マイページ</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to items_path, class:"nav-link text-dark" do %>
+                    <i class="border p-2 rounded">商品一覧</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to cart_items_path, class:"nav-link text-dark" do %>
+                    <i class="border p-2 rounded">カート</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_customer_session_path, method: :delete, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">ログアウト</i>
+                  <% end %>
+                </li>
+              <% end %>
 
-           <% else %>
-           <li>
-            <%= link_to customer_session_path, class:"nav-link text-dark" do %>
-            <i  class="border p-2 rounded">ログイン</i>
-            <% end %>
-           </li>
-           <% end %>
+              <% if customer_signed_in? or admin_signed_in? %>
+              <% else %>
+                <li>
+                  <%= link_to about_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">About</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to items_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">商品一覧</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_customer_registration_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">新規登録</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to customer_session_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">ログイン</i>
+                  <% end %>
+                </li>
+              <% end %>
 
-           <% if admin_signed_in? %>
-           アドミン
-           <%= link_to destroy_admin_session_path, method: :delete do %>
-             adminログアウト
-            <% end %>
-           <% end %>
-           </ul>
+              <% if admin_signed_in? %>
+                <li>
+                  <%= link_to admin_items_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">商品一覧</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to admin_customers_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">会員一覧</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to admin_root_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">注文履歴一覧</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to admin_genres_path, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">ジャンル一覧</i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link text-dark" do %>
+                    <i  class="border p-2 rounded">ログアウト</i>
+                  <% end %>
+                </li>
+              <% end %>
+
+            </ul>
           </div>
-
       </nav>
     </header>
     <main>

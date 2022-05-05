@@ -1,19 +1,39 @@
-<h1>ジャンル一覧・追加</h1>
-  <% if @genre.errors.any? %>
-    <h3><%= @genre.errors.count %>errors prohibited this obj from being saved:</h3>
-    <ul>
-     <% @genre.errors.full_messages.each do |message| %>
-     <li><%= message %></li>
-     <% end %>
-    </ul>
-  <% end %>
-<h2>ジャンル名</h2>
-<%= form_with model: @genre, url: "genres" do |f| %>
-  <%= f.text_field :name, placeholder: "ジャンル名" %>
-  <%= f.submit '新規登録' %>
-<% end %>
-<h2>ジャンル</h2>
-<% @genres.each do |genre| %>
- <%= genre.name %>
- <%= link_to "編集する", edit_admin_genre_path(genre.id) %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <br>
+      <% if @genre.errors.any? %>
+        <h3><%= @genre.errors.count %>件のエラーが発生しました</h3>
+        <ul>
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <h4 class="bg-light text-center offset-md-1" style="width: 18rem;">ジャンル一覧・追加</h4>
+      <br>
+      <%= form_with model: @genre, url: "genres" do |f| %>
+      <table class="table table-borderless">
+        <tr>
+          <th>ジャンル名</th>
+          <td><%= f.text_field :name, placeholder: "ジャンル名", size: "30" %></td>
+          <td><%= f.submit '新規登録', class:'btn btn-success' %></td>
+        </tr>
+      </table>
+      <% end %>
+      <br>
+      <table class="table col-md-8">
+        <tr class="bg-light text-center">
+          <th>ジャンル</th>
+          <td></td>
+        </tr>
+        <% @genres.each do |genre| %>
+        <tr>
+          <td><%= genre.name %></td>
+          <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class:"btn btn-success" %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
